@@ -21,7 +21,7 @@ namespace DistributedSort
                 }
             }
 
-            // Retrieve min element step by step.
+            // Retrieve min element on each step.
             while (buffer.Count > 0)
             {
                 Tuple<T, OrderedBag<T>> nextMin = buffer.RemoveFirst();
@@ -29,8 +29,10 @@ namespace DistributedSort
 
                 if (nextMin.Item2.Count > 0)
                 {
-                    buffer.Add(new Tuple<T, OrderedBag<T>>(
-                        nextMin.Item2.RemoveFirst(), nextMin.Item2));
+                    buffer.Add(
+                        new Tuple<T, OrderedBag<T>>(
+                            nextMin.Item2.RemoveFirst(),
+                            nextMin.Item2));
                 }
             }
         }
